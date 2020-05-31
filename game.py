@@ -7,40 +7,41 @@ width = 300
 height = 600
 
 player_width = 24
+sprite_size = 32
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, starting_pos, surface):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = surface
-        self.pos = starting_pos
+        self.rect = pygame.Rect(starting_pos, (player_width, sprite_size))
 
     def draw(self, screen):
-        screen.blit(self.image, self.pos)
+        screen.blit(self.image, self.rect)
 
     def move(self, direction):
         if direction == 'left':
-            new_x = self.pos[0]-10
+            new_x = self.rect.x - 10
             if new_x < 0:
                 new_x = 0
-            self.pos = (new_x, self.pos[1])
+            self.rect.x = new_x
         if direction == 'right':
-            new_x = self.pos[0]+10
+            new_x = self.rect.x+10
             if new_x + player_width > width:
                 new_x = width - player_width
-            self.pos = (new_x, self.pos[1])
+            self.rect.x = new_x
 
 
 class Stracciatella(pygame.sprite.Sprite):
     def __init__(self, surface):
         pygame.sprite.Sprite.__init__(self)
-
+        pos = (random.randrange(width - sprite_size), 0)
         self.image = surface
-        self.pos = (random.randrange(width-32), 0)
+        self.rect = pygame.Rect(pos, (sprite_size, sprite_size))
 
     def draw(self, screen):
-        self.pos = (self.pos[0], self.pos[1]+4)
-        screen.blit(self.image, self.pos)
+        self.rect.y = self.rect.y+4
+        screen.blit(self.image, self.rect)
 
 class IceGroup(pygame.sprite.Group):
     def __init__(self, *sprites):
@@ -66,7 +67,7 @@ def main():
 
     # Setup player
     bee = pygame.image.load(os.path.join('images', 'bee.png')).convert_alpha()
-    start_pos = (width/2 - player_width/2,height-32)
+    start_pos = (width/2 - player_width/2,height - sprite_size)
     player = Player(start_pos, bee)
 
     # Setup ice-creams
@@ -102,7 +103,27 @@ def main():
         if counter == 20:
             ice_group.add(Stracciatella(ice_cream))
             counter = 0
+
+        # Check if game lost
+        if len(pygame.sprite.spritecollide(player, ice_group, True)) > 0:
+            running = False
         pygame.time.wait(10)
+
+    time = pygame.time.get_ticks()
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            # If the player quits the game
+            if event.type == pygame.QUIT:
+                running = False
+        player.image = pygame.image.load(os.path.join('images', 'bee-creamed.png')).convert_alpha()
+        screen.blit(background, (0,0))
+        player.draw(screen)
+        pygame.display.update()
+
+
+
 
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
