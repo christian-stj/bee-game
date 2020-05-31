@@ -7,8 +7,6 @@ When having ice-cream one hot mother's day sunday my father had a visitor dive i
 
 This little fella hung around on my thumb for 10 minutes cleaning out the ice-cream before getting away to pollinate more flowers. That prompted me to make this little game where the bee tries to dodge the ice-cream falling down from the sky. I made some sloppy "art" in Gimp with varying quality.
 
-![Game](images/game.png)
+![Game](images/game_screens.png)
 
 If you happen to get struck the bee is covered with ice-cream and and you're presented with your score.
-
-![Score-screen](images/end_game.png)
