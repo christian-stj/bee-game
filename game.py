@@ -111,15 +111,23 @@ def main():
 
     time = pygame.time.get_ticks()
 
+    if pygame.font:
+        font = pygame.font.Font(None, 36)
+        text = font.render("Your score: {}".format(str(int(time / 1000))), 1, (10, 10, 10))
+        textpos = text.get_rect(centerx=width/2)
+        background.blit(text, textpos)
+
+    player.image = pygame.image.load(os.path.join('images', 'bee-creamed.png')).convert_alpha()
+    screen.blit(background, (0,0))
+    player.draw(screen)
+
     running = True
     while running:
         for event in pygame.event.get():
             # If the player quits the game
             if event.type == pygame.QUIT:
                 running = False
-        player.image = pygame.image.load(os.path.join('images', 'bee-creamed.png')).convert_alpha()
-        screen.blit(background, (0,0))
-        player.draw(screen)
+
         pygame.display.update()
 
 
