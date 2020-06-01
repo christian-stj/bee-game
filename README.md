@@ -10,3 +10,14 @@ This little fella hung around on my thumb for 10 minutes cleaning out the ice-cr
 ![Game](images/game_screens.png)
 
 If you happen to get struck the bee is covered with ice-cream and and you're presented with your score.
+
+## Installing and running
+
+This game runs with Pygame which you can install by following instructions in the link below:
+- https://www.pygame.org/wiki/GettingStarted
+
+Pygame uses the GNU LGPL licence. When you have Pygame installed you can run the game in the terminal by running
+
+```bash
+$ python3 game.py
+```
