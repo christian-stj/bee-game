@@ -1,7 +1,7 @@
 # Bee-game
 A game with a bee developed with pygame during one mother's day evening.
 
-When having ice-cream one hot mother's day sunday my father had a visitor dive into his ice-cream.
+When having ice-cream one hot sunday, my father had a visitor dive into his ice-cream.
 
 ![Bee](images/bee.jpg)
 
